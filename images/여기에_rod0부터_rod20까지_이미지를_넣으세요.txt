@@ -1,0 +1,7 @@
+파일명 예시:
+rod0.png
+rod1.png
+...
+rod20.png
+
+jpg를 쓰려면 script.js 맨 위의 imageExtension 값을 "jpg"로 바꾸세요.
