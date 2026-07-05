@@ -72,18 +72,34 @@ function calcLuckPercentile(){
       arr.sort((a,b)=>a-b);
       simCache[key]=arr;
     }
+
     const p=percentileOfValue(arr,value);
-    const top=Math.max(0,100-p);
+
+    // 비용은 낮을수록 운이 좋은 것.
+    // p는 "나보다 같거나 적게 쓴 사람 비율"이므로,
+    // 운 좋은 상위 %로 그대로 사용한다.
+    // 예: p=10 -> 운 좋은 상위 10%
+    // 예: p=89 -> 운 좋은 상위 89%, 즉 하위권
+    const topGood=Math.max(0,Math.min(100,p));
+    const worseThan=Math.max(0,100-topGood);
+
     let grade="B";
-    if(top<=1)grade="SSS";else if(top<=5)grade="SS";else if(top<=15)grade="S";else if(top<=35)grade="A";else if(top<=65)grade="B";else if(top<=85)grade="C";else grade="D";
-    luckText.textContent=`시도 중 최고 +${target} 기준 약 상위 ${top.toFixed(1)}% / 등급 ${grade} / 누적 ${formatGold(value)} / 5000회 시뮬레이션 기준`;
-    addLog(`운 분위 계산 완료: 최고 +${target}, 상위 ${top.toFixed(1)}%`,"info");
+    if(topGood<=1)grade="SSS";
+    else if(topGood<=5)grade="SS";
+    else if(topGood<=15)grade="S";
+    else if(topGood<=35)grade="A";
+    else if(topGood<=65)grade="B";
+    else if(topGood<=85)grade="C";
+    else grade="D";
+
+    luckText.textContent=`시도 중 최고 +${target} 기준 운 좋은 상위 ${topGood.toFixed(1)}% / 등급 ${grade} / 누적 ${formatGold(value)} / 나보다 더 쓴 사람 약 ${worseThan.toFixed(1)}% / 5000회 시뮬레이션 기준`;
+    addLog(`운 분위 계산 완료: 최고 +${target}, 운 좋은 상위 ${topGood.toFixed(1)}%`,"info");
     saveState();
   },80);
 }
-function saveState(){const data={state,pearlLevel:pearlLevelSelect.value,targetLevel:targetLevelSelect.value,autoSpeed:autoSpeedSelect.value,guaranteedTarget:guaranteedTargetSelect.value};localStorage.setItem("upgradeSimulatorSaveV15",JSON.stringify(data));}
-function loadState(){const saved=localStorage.getItem("upgradeSimulatorSaveV15");if(!saved)return;try{const data=JSON.parse(saved);if(data.state)state=data.state;if(data.pearlLevel!==undefined)pearlLevelSelect.value=data.pearlLevel;if(data.targetLevel!==undefined)targetLevelSelect.value=data.targetLevel;if(data.autoSpeed!==undefined)autoSpeedSelect.value=data.autoSpeed;if(data.guaranteedTarget!==undefined)guaranteedTargetSelect.value=data.guaranteedTarget;}catch(e){console.log("저장 데이터 불러오기 실패",e);}}
-function resetGame(){if(!confirm("정말 초기화할까요?"))return;stopAuto();state={level:0,totalGold:0,highestLevel:0,tryCount:0,successCount:0,keepCount:0,destroyCount:0,logs:[]};localStorage.removeItem("upgradeSimulatorSaveV15");resultText.textContent="초기화 완료";addLog("시뮬레이터를 초기화했습니다.","info");updateUI();}
+function saveState(){const data={state,pearlLevel:pearlLevelSelect.value,targetLevel:targetLevelSelect.value,autoSpeed:autoSpeedSelect.value,guaranteedTarget:guaranteedTargetSelect.value};localStorage.setItem("upgradeSimulatorSaveV17",JSON.stringify(data));}
+function loadState(){const saved=localStorage.getItem("upgradeSimulatorSaveV17");if(!saved)return;try{const data=JSON.parse(saved);if(data.state)state=data.state;if(data.pearlLevel!==undefined)pearlLevelSelect.value=data.pearlLevel;if(data.targetLevel!==undefined)targetLevelSelect.value=data.targetLevel;if(data.autoSpeed!==undefined)autoSpeedSelect.value=data.autoSpeed;if(data.guaranteedTarget!==undefined)guaranteedTargetSelect.value=data.guaranteedTarget;}catch(e){console.log("저장 데이터 불러오기 실패",e);}}
+function resetGame(){if(!confirm("정말 초기화할까요?"))return;stopAuto();state={level:0,totalGold:0,highestLevel:0,tryCount:0,successCount:0,keepCount:0,destroyCount:0,logs:[]};localStorage.removeItem("upgradeSimulatorSaveV17");resultText.textContent="초기화 완료";addLog("시뮬레이터를 초기화했습니다.","info");updateUI();}
 upgradeBtn.addEventListener("click",upgradeOnce);
 autoBtn.addEventListener("click",toggleAuto);
 averageBtn.addEventListener("click",averageToSelectedTarget);
