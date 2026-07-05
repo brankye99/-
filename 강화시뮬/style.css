@@ -1,0 +1,44 @@
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(circle at top,#333 0%,#111 55%,#050505 100%);color:white;font-family:"맑은 고딕",Arial,sans-serif}
+.app{width:100%;max-width:760px;margin:0 auto;padding:18px}
+header{text-align:center;margin-bottom:18px}
+header h1{margin:0;font-size:32px;color:#ffd76a}
+header p{color:#aaa;margin-top:8px}
+.main-card,.control-card,.gold-card,.stat-card,.luck-card,.log-card{background:rgba(20,20,20,.92);border:1px solid #444;border-radius:18px;padding:18px;margin-bottom:16px;box-shadow:0 0 20px rgba(0,0,0,.5)}
+.main-card{text-align:center;border-color:#735c22}
+.rod-image-box{width:260px;height:150px;margin:0 auto 12px;border:1px solid #5d4a1f;border-radius:16px;background:linear-gradient(135deg,#111,#2b2412);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.rod-image-box img{max-width:100%;max-height:100%;object-fit:contain}
+.rod-placeholder{color:#ffd76a;font-weight:bold;line-height:1.5;text-align:center}
+.rod-placeholder small{color:#aaa;font-weight:normal}
+.level-title{color:#aaa;font-size:18px}
+.level-display{font-size:92px;font-weight:900;color:#ffd447;text-shadow:0 0 18px rgba(255,212,71,.75);line-height:1.1}
+.result-text{min-height:32px;font-size:22px;font-weight:bold;margin-bottom:16px;color:#ddd}
+.info-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.info-box{background:#111;border:1px solid #333;border-radius:12px;padding:12px 8px}
+.info-box span{display:block;color:#aaa;font-size:13px;margin-bottom:6px}
+.info-box strong{color:#fff;font-size:18px}
+.control-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;gap:12px}
+.control-row label{color:#ddd;font-size:16px}
+select{background:#111;color:white;border:1px solid #555;border-radius:10px;padding:10px;font-size:15px;min-width:150px}
+.expected-box{background:#111;border:1px solid #4d3b12;border-radius:14px;padding:13px;margin:4px 0 16px;display:flex;justify-content:space-between;gap:12px;align-items:center}
+.expected-box span{color:#aaa}.expected-box strong{color:#ffd447;font-size:18px}
+.button-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+button{border:none;border-radius:14px;padding:16px 10px;font-size:17px;font-weight:bold;cursor:pointer;background:linear-gradient(#444,#222);color:white;border:1px solid #666}
+button:hover{filter:brightness(1.2)}button:disabled{opacity:.45;cursor:not-allowed}
+.main-btn{background:linear-gradient(#ffd447,#b98200);color:#1b1200;border-color:#ffd447}
+.danger-btn{background:linear-gradient(#8a2020,#3a0808);border-color:#aa3333;grid-column:1 / -1}
+.gold-card{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;text-align:center}
+.gold-card span,.stat-card span{display:block;color:#aaa;font-size:14px;margin-bottom:6px}
+.gold-card strong{font-size:25px;color:#ffd447}
+.stat-card{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;text-align:center}
+.stat-card strong{font-size:22px}
+.luck-card h2,.log-card h2{margin-top:0;color:#ffd447}
+.luck-text{font-size:20px;font-weight:bold;margin-bottom:8px;line-height:1.5}
+.luck-note{color:#999;font-size:13px}
+.log-box{height:250px;overflow-y:auto;background:#050505;border:1px solid #333;border-radius:12px;padding:12px;font-size:14px;line-height:1.6}
+.log-success{color:#7CFF7C}.log-keep{color:#CCC}.log-destroy{color:#FF6B6B}.log-info{color:#7CB7FF}
+.success-anim{animation:successFlash .25s}.keep-anim{animation:keepFlash .25s}.destroy-anim{animation:destroyShake .25s}
+@keyframes successFlash{0%{transform:scale(1);box-shadow:0 0 0 rgba(255,215,0,0)}50%{transform:scale(1.03);box-shadow:0 0 35px rgba(255,215,0,.9)}100%{transform:scale(1);box-shadow:0 0 0 rgba(255,215,0,0)}}
+@keyframes keepFlash{0%{opacity:1}50%{opacity:.65}100%{opacity:1}}
+@keyframes destroyShake{0%{transform:translateX(0)}20%{transform:translateX(-10px)}40%{transform:translateX(10px)}60%{transform:translateX(-8px)}80%{transform:translateX(8px)}100%{transform:translateX(0)}}
+@media(max-width:600px){.level-display{font-size:72px}.info-grid{grid-template-columns:repeat(2,1fr)}.button-grid{grid-template-columns:1fr}.gold-card{grid-template-columns:1fr}.stat-card{grid-template-columns:repeat(2,1fr)}.control-row,.expected-box{flex-direction:column;align-items:stretch}select{width:100%}.rod-image-box{width:230px;height:130px}}

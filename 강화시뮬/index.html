@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>낚시대 강화 시뮬레이터</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+  <header>
+    <h1>낚시대 강화 시뮬레이터</h1>
+    <p>파괴 시 0강 복귀 / 진주 업그레이드 적용</p>
+  </header>
+
+  <section class="main-card" id="mainCard">
+    <div class="rod-image-box" id="rodImageBox"></div>
+    <div class="level-title">현재 강화</div>
+    <div id="levelDisplay" class="level-display">+0</div>
+    <div id="resultText" class="result-text">강화 대기 중</div>
+
+    <div class="info-grid">
+      <div class="info-box"><span>성공률</span><strong id="successRate">100%</strong></div>
+      <div class="info-box"><span>유지율</span><strong id="keepRate">0%</strong></div>
+      <div class="info-box"><span>파괴율</span><strong id="destroyRate">0%</strong></div>
+      <div class="info-box"><span>강화비용</span><strong id="costDisplay">100 G</strong></div>
+    </div>
+  </section>
+
+  <section class="control-card">
+    <div class="control-row">
+      <label>진주 업그레이드</label>
+      <select id="pearlLevel">
+        <option value="0">0강 (+0%)</option>
+        <option value="1">1강 (+0.5%)</option>
+        <option value="2">2강 (+1.0%)</option>
+        <option value="3">3강 (+1.5%)</option>
+        <option value="4">4강 (+2.0%)</option>
+        <option value="5">5강 (+2.5%)</option>
+        <option value="6">6강 (+3.0%)</option>
+        <option value="7">7강 (+3.5%)</option>
+        <option value="8">8강 (+4.0%)</option>
+        <option value="9">9강 (+4.5%)</option>
+        <option value="10">10강 (+5.0%)</option>
+      </select>
+    </div>
+
+    <div class="control-row">
+      <label>자동강화 목표</label>
+      <select id="targetLevel">
+        <option value="16">16강</option>
+        <option value="17">17강</option>
+        <option value="18">18강</option>
+        <option value="19">19강</option>
+        <option value="20">20강</option>
+      </select>
+    </div>
+
+    <div class="control-row">
+      <label>자동강화 속도</label>
+      <select id="autoSpeed">
+        <option value="250">0.25초</option>
+        <option value="100">0.1초</option>
+        <option value="50">0.05초</option>
+        <option value="10">0.01초</option>
+      </select>
+    </div>
+
+    <div class="control-row">
+      <label>확정강화 목표</label>
+      <select id="guaranteedTarget">
+        <option value="1">1강</option><option value="2">2강</option><option value="3">3강</option>
+        <option value="4">4강</option><option value="5">5강</option><option value="6">6강</option>
+        <option value="7">7강</option><option value="8">8강</option><option value="9">9강</option>
+        <option value="10">10강</option><option value="11">11강</option><option value="12">12강</option>
+        <option value="13">13강</option><option value="14">14강</option><option value="15">15강</option>
+        <option value="16" selected>16강</option>
+      </select>
+    </div>
+
+    <div class="expected-box">
+      <span>확정강화 예상 소모</span>
+      <strong id="guaranteedCostPreview">-</strong>
+    </div>
+
+    <div class="button-grid">
+      <button id="upgradeBtn" class="main-btn">강화</button>
+      <button id="autoBtn">자동강화 시작</button>
+      <button id="averageBtn">평균비용 확정강화</button>
+      <button id="luckBtn">운 분위 계산</button>
+      <button id="resetBtn" class="danger-btn">초기화</button>
+    </div>
+  </section>
+
+  <section class="gold-card">
+    <div><span>누적 골드</span><strong id="totalGold">0 G</strong></div>
+    <div><span>시도 중 최고 강화</span><strong id="highestLevel">+0</strong></div>
+  </section>
+
+  <section class="stat-card">
+    <div><span>총 시도</span><strong id="tryCount">0</strong></div>
+    <div><span>성공</span><strong id="successCount">0</strong></div>
+    <div><span>유지</span><strong id="keepCount">0</strong></div>
+    <div><span>파괴</span><strong id="destroyCount">0</strong></div>
+  </section>
+
+  <section class="luck-card">
+    <h2>운 판정</h2>
+    <div id="luckText" class="luck-text">강화 시도 중 최고 도달 등급과 누적 골드 기준으로 운 분위 계산 가능</div>
+    <div class="luck-note">현재 누적 골드와 강화 시도 중 가장 높게 도달한 등급 기준으로 5000회 시뮬레이션과 비교합니다.</div>
+  </section>
+
+  <section class="log-card">
+    <h2>강화 로그</h2>
+    <div id="logBox" class="log-box"></div>
+  </section>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
